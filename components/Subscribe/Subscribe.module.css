@@ -71,6 +71,11 @@
     font-size: 2rem;
 }
 
+.subscribe_box_right_img{
+    border-radius: 15%;
+    margin-left: 4rem;
+}
+
 
 
 @media screen and (min-device-width: 320px) and (max-device-width: 768px){

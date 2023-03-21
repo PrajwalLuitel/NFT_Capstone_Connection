@@ -16,8 +16,14 @@ import LikeProfile from "./LikeProfile/LikeProfile";
 import Slider from "./Slider/Slider";
 import Brand from "./Brand/Brand";
 import Video from "./Video/Video";
+import Banner from "./Banner/Banner";
+import Loader from "./Loader/Loader";
+import Error from "./Error/Error";
 
 export {
+  Error,
+  Loader,
+  Banner,
   Button,
   Footer,
   NavBar,

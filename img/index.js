@@ -25,7 +25,7 @@ import service2 from "./service-2.png";
 import service3 from "./service-3.png";
 import service4 from "./service-4.png";
 import logoLight from "./logo-light.svg";
-import logo from "./logo-black.svg";
+import logo from "./logo.png";
 import facebook from "./facebook.svg";
 import twitter from "./twitter.svg";
 import telegram from "./telegram.svg";
@@ -51,9 +51,22 @@ import provider3 from "./provider-3.png";
 import provider4 from "./provider-4.png";
 import aayush from "./aayush.jpg";
 import prajwal from "./prajwal.jpeg";
+import lion from "./lion.png";
+import crypto from "./crypto.png";
+import astronaut from "./astronaut.jpg";
+import bannerimg from "./bannerimg.jpg";
+import loader from "./loader.gif";
+import error from "./error.webp";
+
 
 
 export default {
+  error,
+  loader,
+  bannerimg,
+  astronaut,
+  crypto,
+  lion,
   banner,
   prajwal,
   aayush,

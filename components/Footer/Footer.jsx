@@ -21,7 +21,7 @@ const Footer = () => {
     <div className={Style.footer}>
       <div className={Style.footer_box}>
         <div className={Style.footer_box_social}>
-          <Image src={images.logo} alt="Footer logo" height={100} width={100} />
+          <Image src={images.logo} alt="Footer logo" height={70} width={100} />
           <p>
             A large scale digital marketplace for the enthusiasts and collectors
             for NFTs(Non-Fungible Tokens). Dive in right away for first hand

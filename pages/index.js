@@ -10,14 +10,16 @@ import {
   Collection,
   Filter,
   FollowerTab,
-  HeroSection,
+  Loader,
   NFTCard,
   Service,
   Slider,
   Subscribe,
   Title,
   Video,
+  Banner
 } from "../components/componentsindex";
+import { getTopcreators } from "../TopCreators/TopCreators";
 
 // importing from smart contract
 import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
@@ -29,19 +31,41 @@ const Home = () => {
 
   useEffect(() => {
     checkIfWalletConnected();
-  },[])
+  }, [])
+  
+  const { fetchNFTs } = useContext(NFTMarketplaceContext);
+  const [nfts, setNfts] = useState([]);
+  const [nftsCopy, setNftsCopy] = useState([]);
+
+
+  // Creators list
+  const creators = getTopcreators(nfts);
+
+
+  useEffect(() => {
+    try {
+      fetchNFTs().then((items) => {
+        setNfts(items.reverse());
+        setNftsCopy(items);
+      });
+    } catch (error) {
+      console.log("Please reload the browser"); // setError("Please reload the browser", error);
+    }
+  }, []);
+
+
 
   return (
     <div className={Style.homePage}>
-      <HeroSection />
+      <Banner/>
       <Service />
       <BigNFTSlider />
       <Title
       heading="Latest Audio Collection"
       paragraph="Have a look at our choice of NFTs. They're awesome."
       />
-      <AudioLive/>
-      <FollowerTab />
+      <AudioLive />
+      {creators.length ==0 ? <Loader/> : <FollowerTab TopCreator={creators} /> }
       <Slider/>
       <Collection/>
       <Title
@@ -49,7 +73,8 @@ const Home = () => {
       paragraph="Have a look at our choice of NFTs. They're awesome."
       />
       <Filter />
-      <NFTCard/>
+      {nfts.length ==0 ? <Loader/> : <NFTCard NFTData={nfts} /> }
+      
       <Title
       heading="Browse by Category"
       paragraph="View Various Categories of NFT data in the Marketplace"

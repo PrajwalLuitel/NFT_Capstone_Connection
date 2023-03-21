@@ -41,7 +41,7 @@ contract NFTMarketplace is ERC721URIStorage {
         _;
     }
 
-    constructor() ERC721("Metaverse Tokens", "METT") {
+    constructor() ERC721("FlameOn", "FON") {
         owner = payable(msg.sender);
     }
 

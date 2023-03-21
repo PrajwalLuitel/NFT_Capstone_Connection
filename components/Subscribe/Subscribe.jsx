@@ -32,10 +32,11 @@ const Subscribe = () => {
 
         <div className={Style.subscribe_box_right}>
           <Image
-            src={images.update}
+            className={Style.subscribe_box_right_img}
+            src={images.lion}
             alt="get update"
             height={350}
-            width={370}
+            width={350}
           />
         </div>
       </div>

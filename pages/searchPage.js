@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 
 //INTRNAL IMPORT
 import Style from "../styles/searchPage.module.css";
-import { Slider, Brand } from "../components/componentsindex";
+import { Slider, Brand, Loader } from "../components/componentsindex";
 import { SearchBar } from "../SearchPage/searchBarIndex";
 import { Filter } from "../components/componentsindex";
 
@@ -25,7 +25,8 @@ const searchPage = () => {
         setNftsCopy(items);
       });
     } catch (error) {
-      console.log("Please reload the browser"); // setError("Please reload the browser", error);
+      // console.log("Please reload the browser");
+      setError("Please reload the browser", error);
     }
   }, []);
 
@@ -61,7 +62,7 @@ const searchPage = () => {
       <Banner bannerImage={images.creatorbackground2} />
       <SearchBar onHandleSearch = {onHandleSearch}  onClearSearch={onClearSearch} />
       <Filter />
-      <NFTCardTwo NFTData={nfts} />
+      {nfts.length==0 ? <Loader/> : <NFTCardTwo NFTData={nfts} />}
       <Slider />
       <Brand />
     </div>

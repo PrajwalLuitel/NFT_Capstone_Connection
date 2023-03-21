@@ -11,7 +11,7 @@ const Banner = ({ bannerImage }) => {
         <Image
           src={bannerImage}
           alt="background"
-          width={1352}
+          width={1350}
           height={300}
         />
       </div>

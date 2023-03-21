@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/Image";
 import Link from "next/Link";
+import {useRouter} from "next/router";
 
 // Import icons
 import { MdNotifications } from "react-icons/md";
@@ -10,7 +11,7 @@ import { CgMenuLeft, CgMenuRight } from "react-icons/cg";
 // Internal Import
 import Style from "./NavBar.module.css";
 import { Discover, HelpCenter, Notification, Profile, SideBar } from "./index";
-import { Button } from "../componentsindex";
+import { Button, Error } from "../componentsindex";
 import images from "../../img";
 
 // smart contract import
@@ -23,9 +24,11 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
+  
+  const router = useRouter();
 
   // receiving data from the smart contracts
-  const { currentAccount, connectWallet } = useContext(NFTMarketplaceContext);
+  const { currentAccount, connectWallet, openError } = useContext(NFTMarketplaceContext);
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
@@ -77,17 +80,18 @@ const NavBar = () => {
     }
   };
 
+
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
-          <div className={Style.logo}>
+          <div className={Style.logo} onClick={()=>{router.push("/")}}>
             <Image
               className={Style.logo_img}
               src={images.logo}
               alt="NFT MARKETPLACE"
               width={70}
-              height={70}
+              height={45}
             />
           </div>
           <div className={Style.navbar_container_left_box_input}>
@@ -133,9 +137,7 @@ const NavBar = () => {
             {currentAccount == "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
             ) : (
-              <Link href={{pathname: "/uploadNFT"}}>
-              <Button btnName="Create" handleClick = {()=>{}} />
-              </Link>
+              <Button btnName="Create" handleClick = {()=>router.push("/uploadNFT")} />
             )}
           </div>
 
@@ -150,7 +152,7 @@ const NavBar = () => {
                 onClick={() => openProfile()}
                 className={Style.navbar_container_right_profile}
               />
-              {profile && <Profile />}
+              {profile && <Profile currentAccount ={currentAccount} />}
             </div>
           </div>
 
@@ -170,7 +172,9 @@ const NavBar = () => {
           <SideBar setOpenSideMenu={setOpenSideMenu} currentAccount = {currentAccount} connectWallet = {connectWallet} />
         </div>
       )}
-    </div>
+  
+      {openError && <Error/>}
+      </div>
   );
 };
 

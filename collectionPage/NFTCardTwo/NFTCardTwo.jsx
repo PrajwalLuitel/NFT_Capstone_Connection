@@ -43,7 +43,7 @@ const NFTCardTwo = ({ NFTData }) => {
           </div>
 
           <div className={Style.NFTCardTwo_box_img}>
-            <Image
+              <Image
               src={el.image}
               alt="NFT"
               width={250}
