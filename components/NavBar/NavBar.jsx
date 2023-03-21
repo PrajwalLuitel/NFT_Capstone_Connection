@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
-import Image from "next/Image";
-import Link from "next/Link";
+import Image from "next/image";
+import Link from "next/link";
 import {useRouter} from "next/router";
 
 // Import icons
