@@ -115,11 +115,11 @@ export const NFTMarketplaceProvider = ({ children }) => {
   };
 
   // create nft function
-  const createNFT = async (name, price, image, description, router) => {
-    if (!name || !description || !price || !image)
+  const createNFT = async (name, price, image, description, collection, router) => {
+    if (!name || !description || !price || !image || !collection)
       return setError("Data Is Missing"), setOpenError(true);
 
-    const data = JSON.stringify({ name, description, image });
+    const data = JSON.stringify({ name, description, image, collection });
 
     try {
       const added = await client.add(data);
@@ -172,7 +172,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
             const tokenURI =
               `${subdomain}` + longTokenURI.slice(22, longTokenURI.length);
             const {
-              data: { image, name, description },
+              data: { image, name, description, collection },
             } = await axios.get(tokenURI);
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
@@ -188,6 +188,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
               name,
               description,
               tokenURI,
+              collection
             };
           }
         )
@@ -222,7 +223,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
               `${subdomain}` + longTokenURI.slice(22, longTokenURI.length);
 
             const {
-              data: { image, name, description },
+              data: { image, name, description, collection },
             } = await axios.get(tokenURI);
             const price = ethers.utils.formatUnits(
               unformattedPrice.toString(),
@@ -238,6 +239,7 @@ export const NFTMarketplaceProvider = ({ children }) => {
               name,
               description,
               tokenURI,
+              collection
             };
           }
         )

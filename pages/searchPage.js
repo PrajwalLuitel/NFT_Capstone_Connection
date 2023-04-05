@@ -59,7 +59,6 @@ const searchPage = () => {
   // ];
   return (
     <div className={Style.searchPage}>
-      <Banner bannerImage={images.creatorbackground2} />
       <SearchBar onHandleSearch = {onHandleSearch}  onClearSearch={onClearSearch} />
       <Filter />
       {nfts.length==0 ? <Loader/> : <NFTCardTwo NFTData={nfts} />}

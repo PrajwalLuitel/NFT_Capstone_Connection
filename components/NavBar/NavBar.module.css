@@ -2,10 +2,10 @@
 .navbar{
     width: 100%;
     padding-block: 1.5rem;
-    position: relative;
+    position: fixed; top:0;left:0;
     z-index: 111111111;
     color: white;
-    backdrop-filter: blur(7px);
+    backdrop-filter: blur(17px);
 }
 
 .navbar_container{
@@ -27,16 +27,25 @@
 
 
 .navbar_container_left_box_input_box{
-    width: 60%;
+    width: 28%;
+    background-color: var(--icons-light-color);
+    color: var(--main-bg-color);
     border: 1px solid var(--icons-light-color);
     display: flex;
     align-items: center;
-    padding: .5rem;
+    padding: .4rem;
     border-radius: 2rem;
+    cursor: pointer;
+    transition: all .5s ease-in;
 }
 
-.navbar_container_left_box_input_box input{
-    width: 90%;
+.navbar_container_left_box_input_box:hover{
+    background-color: var(--main-bg-color);
+    color: var(--icons-light-color);
+}
+
+.navbar_container_left_box_input_box span{
+    width: 68%;
     border: none;
     outline: none;
     background-color:  transparent;

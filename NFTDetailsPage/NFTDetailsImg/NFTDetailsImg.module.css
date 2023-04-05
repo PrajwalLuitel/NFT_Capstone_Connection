@@ -44,6 +44,12 @@
     font-size: 1.4rem;
 }
 
+
+.NFTDetailsImg_box_description, .NFTDetailsImg_box_details{
+    color: var(--main-bg-color);
+}
+
+
 .NFTDetailsImg_box_details,
 .NFTDetailsImg_box_description{
     display: flex;

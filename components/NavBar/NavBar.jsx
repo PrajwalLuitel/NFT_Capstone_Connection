@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 // Import icons
 import { MdNotifications } from "react-icons/md";
@@ -24,24 +24,34 @@ const NavBar = () => {
   const [notification, setNotification] = useState(false);
   const [profile, setProfile] = useState(false);
   const [openSideMenu, setOpenSideMenu] = useState(false);
-  
+
   const router = useRouter();
 
   // receiving data from the smart contracts
-  const { currentAccount, connectWallet, openError } = useContext(NFTMarketplaceContext);
+  const { currentAccount, connectWallet, openError } = useContext(
+    NFTMarketplaceContext
+  );
 
   const openMenu = (e) => {
     const btnText = e.target.innerText;
     if (btnText == "Discover") {
-      setDiscover(true);
-      setHelp(false);
-      setNotification(false);
-      setProfile(false);
+      if (discover == false) {
+        setDiscover(true);
+        setHelp(false);
+        setNotification(false);
+        setProfile(false);
+      } else {
+        setDiscover(false);
+      }
     } else if (btnText == "Help Center") {
-      setDiscover(false);
-      setHelp(true);
-      setNotification(false);
-      setProfile(false);
+      if (help == false) {
+        setDiscover(false);
+        setHelp(true);
+        setNotification(false);
+        setProfile(false);
+      } else {
+        setHelp(false);
+      }
     } else {
       setDiscover(false);
       setHelp(false);
@@ -80,12 +90,16 @@ const NavBar = () => {
     }
   };
 
-
   return (
     <div className={Style.navbar}>
       <div className={Style.navbar_container}>
         <div className={Style.navbar_container_left}>
-          <div className={Style.logo} onClick={()=>{router.push("/")}}>
+          <div
+            className={Style.logo}
+            onClick={() => {
+              router.push("/");
+            }}
+          >
             <Image
               className={Style.logo_img}
               src={images.logo}
@@ -94,10 +108,11 @@ const NavBar = () => {
               height={45}
             />
           </div>
-          <div className={Style.navbar_container_left_box_input}>
+          <div className={Style.navbar_container_left_box_input} onClick={() => router.push("/searchPage")}>
             <div className={Style.navbar_container_left_box_input_box}>
-              <input type="text" placeholder="Search NFT" />
-              <BsSearch onClick={() => {}} className={Style.search_icon} />
+              <span>Search </span>
+
+              <BsSearch  className={Style.search_icon} />
             </div>
           </div>
         </div>
@@ -137,7 +152,10 @@ const NavBar = () => {
             {currentAccount == "" ? (
               <Button btnName="Connect" handleClick={() => connectWallet()} />
             ) : (
-              <Button btnName="Create" handleClick = {()=>router.push("/uploadNFT")} />
+              <Button
+                btnName="Create"
+                handleClick={() => router.push("/uploadNFT")}
+              />
             )}
           </div>
 
@@ -152,7 +170,7 @@ const NavBar = () => {
                 onClick={() => openProfile()}
                 className={Style.navbar_container_right_profile}
               />
-              {profile && <Profile currentAccount ={currentAccount} />}
+              {profile && <Profile currentAccount={currentAccount} />}
             </div>
           </div>
 
@@ -169,12 +187,16 @@ const NavBar = () => {
       {/*// Sidebar Component*/}
       {openSideMenu && (
         <div className={Style.sideBar}>
-          <SideBar setOpenSideMenu={setOpenSideMenu} currentAccount = {currentAccount} connectWallet = {connectWallet} />
+          <SideBar
+            setOpenSideMenu={setOpenSideMenu}
+            currentAccount={currentAccount}
+            connectWallet={connectWallet}
+          />
         </div>
       )}
-  
-      {openError && <Error/>}
-      </div>
+
+      {openError && <Error />}
+    </div>
   );
 };
 

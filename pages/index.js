@@ -27,13 +27,12 @@ import { NFTMarketplaceContext } from "../Context/NFTMarketplaceContext";
 
 const Home = () => {
 
-  const { checkIfWalletConnected } = useContext(NFTMarketplaceContext);
+  const { checkIfWalletConnected, fetchNFTs } = useContext(NFTMarketplaceContext);
 
   useEffect(() => {
     checkIfWalletConnected();
   }, [])
   
-  const { fetchNFTs } = useContext(NFTMarketplaceContext);
   const [nfts, setNfts] = useState([]);
   const [nftsCopy, setNftsCopy] = useState([]);
 
@@ -59,7 +58,7 @@ const Home = () => {
     <div className={Style.homePage}>
       <Banner/>
       <Service />
-      <BigNFTSlider />
+      {nfts.length == 0 ? <Loader/> : <BigNFTSlider sliderData= {nfts} /> }
       <Title
       heading="Latest Audio Collection"
       paragraph="Have a look at our choice of NFTs. They're awesome."

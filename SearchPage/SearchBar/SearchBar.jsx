@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import { BsSearch, BsArrowRight } from "react-icons/bs";
 
 //INTERNAL IMPORT
@@ -8,6 +9,13 @@ const SearchBar = ({onHandleSearch, onClearSearch}) => {
 
   const [search, setSearch] = useState("");
   const [searchItem, setSearchItem] = useState(search);
+
+  const router = useRouter();
+  useEffect(() => {
+    if (!router.isReady) return;
+    setSearch(router.query);
+    setSearchItem(search);
+  }, [router.isReady]);
 
   useEffect(() => {
     const timer = setTimeout(() => setSearch(searchItem), 1000);

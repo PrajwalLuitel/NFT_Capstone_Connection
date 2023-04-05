@@ -25,6 +25,8 @@
 }
 
 .SearchBar_box input{
+    font-size: 1.5rem;
+    color: var(--icons-color);
     width: 85%;
     border: 0;
     outline: 0;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineHttp, MdOutlineAttachFile } from "react-icons/md";
 import { FaPercent } from "react-icons/fa";
 import { AiTwotonePropertySafety } from "react-icons/ai";
@@ -13,46 +13,74 @@ import images from "../img";
 import { Button } from "../components/componentsindex.js";
 import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 
-const UloadNFT = ({ uploadToIPFS, createNFT }) => {
+
+
+
+const UloadNFT = ({ uploadToIPFS, createNFT, fetchNFTs }) => {
   const [price, setPrice] = useState("");
-  const [active, setActive] = useState(0);
+  // const [active, setActive] = useState(0);
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
   const [royalties, setRoyalties] = useState("");
   const [fileSize, setFileSize] = useState("");
-  const [category, setCategory] = useState(0);
+  const [category, setCategory] = useState("");
   const [properties, setProperties] = useState("");
   const [image, setImage] = useState(null);
 
   const router = useRouter();
 
-  const categoryArry = [
-    {
-      image: images.nft_image_1,
-      category: "Sports",
-    },
-    {
-      image: images.nft_image_2,
-      category: "Arts",
-    },
-    {
-      image: images.nft_image_3,
-      category: "Music",
-    },
-    {
-      image: images.nft_image_1,
-      category: "Digital",
-    },
-    {
-      image: images.nft_image_2,
-      category: "Time",
-    },
-    {
-      image: images.nft_image_3,
-      category: "Photography",
-    },
-  ];
+  const [nfts, setNfts] = useState([]);
+  const [categoryArry, setCategoryArry] = useState([]);
+
+  useEffect(() => {
+    try {
+      fetchNFTs().then((items) => {
+        setNfts(items.reverse());
+      });
+
+    } catch (error) {
+      setError("Please reload the browser", error);
+    }
+  }, []);
+
+  try {
+    for (let i = 0; i < nfts.length; i++) {
+      if (! categoryArry.includes(nfts[i].collection) && (nfts[i].collection != "")) {
+        setCategoryArry(categoryArry.push(nfts[i].collection));
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+
+  // const categoryArry = [
+  //   {
+  //     image: images.nft_image_1,
+  //     category: "Sports",
+  //   },
+  //   {
+  //     image: images.nft_image_2,
+  //     category: "Arts",
+  //   },
+  //   {
+  //     image: images.nft_image_3,
+  //     category: "Music",
+  //   },
+  //   {
+  //     image: images.nft_image_1,
+  //     category: "Digital",
+  //   },
+  //   {
+  //     image: images.nft_image_2,
+  //     category: "Time",
+  //   },
+  //   {
+  //     image: images.nft_image_3,
+  //     category: "Photography",
+  //   },
+  // ];
 
   return (
     <div className={Style.upload}>
@@ -124,20 +152,34 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
           <p className={Style.upload_box_input_para}>
             Choose an exiting collection or create a new one
           </p>
+          <div className={formStyle.Form_box_input}>
+        
+        <div className={formStyle.Form_box_input_box}>
+          <div className={formStyle.Form_box_input_box_icon}>
+            <AiTwotonePropertySafety />
+          </div>
+          <input
+            type="text"
+            placeholder="Create a Collection"
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </div>
+          </div>
+          <br/>
 
           <div className={Style.upload_box_slider_div}>
             {categoryArry.map((el, i) => (
               <div
                 className={`${Style.upload_box_slider} ${
-                  active == i + 1 ? Style.active : ""
+                  category == el ? Style.active : ""
                 }`}
                 key={i + 1}
-                onClick={() => (setActive(i + 1), setCategory(el.category))}
+                onClick={() => (setActive(i + 1), setCategory(el))}
               >
                 <div className={Style.upload_box_slider_box}>
                   <div className={Style.upload_box_slider_box_img}>
                     <Image
-                      src={el.image}
+                      src={images.creatorbackground1}
                       alt="background image"
                       width={70}
                       height={70}
@@ -148,13 +190,17 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
                     <TiTick />
                   </div>
                 </div>
-                <p>Crypto Legend - {el.category} </p>
+                <p>{el} </p>
               </div>
             ))}
           </div>
         </div>
 
         <div className={formStyle.Form_box_input_social}>
+          
+        
+          
+          
           <div className={formStyle.Form_box_input}>
             <label htmlFor="Royalties">Royalties</label>
             <div className={formStyle.Form_box_input_box}>
@@ -182,7 +228,7 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
             </div>
           </div>
           <div className={formStyle.Form_box_input}>
-            <label htmlFor="Propertie">Properties</label>
+            <label htmlFor="Properties">Properties</label>
             <div className={formStyle.Form_box_input_box}>
               <div className={formStyle.Form_box_input_box_icon}>
                 <AiTwotonePropertySafety />
@@ -219,11 +265,11 @@ const UloadNFT = ({ uploadToIPFS, createNFT }) => {
                 price,
                 image,
                 description,
+                category,
                 router
                 // website,
                 // royalties,
                 // fileSize,
-                // category,
                 // properties
               )
             }
