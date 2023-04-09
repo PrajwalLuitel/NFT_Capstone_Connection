@@ -10,8 +10,8 @@ const Discover = () => {
 
   const discover = [
     {
-      name: "Collection",
-      link: "collection"
+      name: "Categories",
+      link: "categories"
     },
     {
       name: "Search",

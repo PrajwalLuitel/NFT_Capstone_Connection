@@ -27,7 +27,7 @@
 
 
 .navbar_container_left_box_input_box{
-    width: 28%;
+    width: 10%;
     background-color: var(--icons-light-color);
     color: var(--main-bg-color);
     border: 1px solid var(--icons-light-color);
@@ -40,12 +40,12 @@
 }
 
 .navbar_container_left_box_input_box:hover{
-    background-color: var(--main-bg-color);
+    background-color: transparent;
     color: var(--icons-light-color);
 }
 
 .navbar_container_left_box_input_box span{
-    width: 68%;
+    width: 10%;
     border: none;
     outline: none;
     background-color:  transparent;

@@ -108,9 +108,9 @@ const NavBar = () => {
               height={45}
             />
           </div>
-          <div className={Style.navbar_container_left_box_input} onClick={() => router.push("/searchPage")}>
-            <div className={Style.navbar_container_left_box_input_box}>
-              <span>Search </span>
+          <div className={Style.navbar_container_left_box_input} >
+            <div className={Style.navbar_container_left_box_input_box} onClick={() => router.push("/searchPage")}>
+              <span> </span>
 
               <BsSearch  className={Style.search_icon} />
             </div>

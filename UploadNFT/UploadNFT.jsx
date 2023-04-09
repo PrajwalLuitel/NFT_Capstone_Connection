@@ -18,7 +18,7 @@ import { DropZone } from "../UploadNFT/uploadNFTIndex.js";
 
 const UloadNFT = ({ uploadToIPFS, createNFT, fetchNFTs }) => {
   const [price, setPrice] = useState("");
-  // const [active, setActive] = useState(0);
+  const [active, setActive] = useState(0);
   const [name, setName] = useState("");
   const [website, setWebsite] = useState("");
   const [description, setDescription] = useState("");
@@ -47,7 +47,7 @@ const UloadNFT = ({ uploadToIPFS, createNFT, fetchNFTs }) => {
   try {
     for (let i = 0; i < nfts.length; i++) {
       if (! categoryArry.includes(nfts[i].collection) && (nfts[i].collection != "")) {
-        setCategoryArry(categoryArry.push(nfts[i].collection));
+        categoryArry.push(nfts[i].collection);
       }
     }
   } catch (error) {
